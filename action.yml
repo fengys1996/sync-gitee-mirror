@@ -1,5 +1,5 @@
 name: 'sync-gitee-mirror'
-description: '同步 GitHub 仓库到 Gitee 仓库'
+description: '同步 GitHub 仓库的指定分支到 Gitee 仓库'
 inputs:
   repository:
     description: 'Gitee 仓库，例如 abersheeran/gitee-mirror'
@@ -13,6 +13,9 @@ inputs:
   token:
     description: 'GitHub 令牌，用于私有仓库的拉取。'
     default: ${{ github.token }}
+  branch:
+    description: 'Branches that need to be synchronized'
+    required: true
 runs:
   using: composite
   steps:
@@ -30,7 +33,5 @@ runs:
         git remote add gitee "${remote_repo}"
         git show-ref # useful for debugging
         git branch --verbose
-        # publish all
-        git push --all --force gitee
-        git push --tags --force gitee
+        git push --force gitee ${{ inputs.branch }}
       shell: bash

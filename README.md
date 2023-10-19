@@ -13,6 +13,7 @@
     repository: abersheeran/sync-gitee-mirror
     username: ${{ secrets.USERNAME }}
     password: ${{ secrets.PASSWORD }}
+    branch: main
 ```
 
 - `repository`：填你的用户名与仓库名，格式如样例所示。
